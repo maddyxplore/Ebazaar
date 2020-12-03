@@ -10,7 +10,7 @@ def otp():
 
 def send_mail(reciever):
     otp_num = str(otp())
-    yagmail.register('Ebazaar.web@gmail.com', 'madman2018')
+    yagmail.register('Ebazaar.web@gmail.com', '###pasword fro the email id')
     receiver = reciever
     body = "your otp is: "+otp_num
 
