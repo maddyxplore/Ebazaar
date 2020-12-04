@@ -1,0 +1,56 @@
+{% extends 'home.html'%}
+{% block signup%}
+    <h1>Farmer Sign_Up </h1>
+    <form action="verify" method="POST">
+        {% csrf_token %}
+        <input type="text" name="first_name" placeholder="first_name">
+        <input type="text" name="second_name" placeholder="second_name">
+        <br><br>
+        <input type="email" name="email" placeholder="email">
+        <br><br>
+        <input type="text" name="phone" placeholder="phone" pattern="[0-9]{10,10}" title="please enter 10-digit valid phone number">
+        <br><br>
+        <input type="password" name="password" placeholder="Password">
+        <br><br>
+        <input type="password" name="cpassword" placeholder="Confirm Password">
+        <br><br>
+
+        choose your Current location
+        <select type="text" name="location">
+            
+            <option value="chennai">Chennai</option>
+            <option value="chennai">Chengalpat</option>
+            <option value="chennai">kanchipuram</option>
+            <option value="chennai">Tiruvallur</option>
+            <option value="chennai">Vilupuram</option>
+            <option value="chennai">Thiruvannamalai</option>
+            <option value="chennai">Vellore</option>
+        </select>
+        <br><br>
+        choose your nearby location
+        <select type="text" name="nearby1location">
+            
+            <option value="chennai">Chennai</option>
+            <option value="chennai">Chengalpat</option>
+            <option value="chennai">kanchipuram</option>
+            <option value="chennai">Tiruvallur</option>
+            <option value="chennai">Vilupuram</option>
+            <option value="chennai">Thiruvannamalai</option>
+            <option value="chennai">Vellore</option>
+        </select>
+        <br><br>
+        choose your nearby location
+        <select type="text" name="nearby2location">
+            
+            <option value="chennai">Chennai</option>
+            <option value="chennai">Chengalpat</option>
+            <option value="chennai">kanchipuram</option>
+            <option value="chennai">Tiruvallur</option>
+            <option value="chennai">Vilupuram</option>
+            <option value="chennai">Thiruvannamalai</option>
+            <option value="chennai">Vellore</option>
+        </select>
+        <br><br>
+        <input type="submit" value="Verify Email">
+    </form>
+{% endblock %}
