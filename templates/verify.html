@@ -1,7 +1,7 @@
 {% extends 'home.html'%}
 {% block otp%}
 
-<form method="GET" action="verify">
+<form method="GET" action="verify ">
     {% csrf_token %}
     <input type="text" name="otp" placeholder="Enter your otp here..">
     <input type="hidden" name="email" value={{ data_set.email }}>
