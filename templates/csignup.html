@@ -1,7 +1,7 @@
 {% extends 'home.html'%}
 {% block signup%}
     <h1>Customer Sign_Up </h1>
-    <form action="verify" method="POST">
+    <form action="cverify" method="POST">
         {% csrf_token %}
         <input type="text" name="first_name" placeholder="first_name">
         <input type="text" name="second_name" placeholder="second_name">

@@ -1,7 +1,7 @@
 {% extends 'home.html'%}
 {% block signup%}
     <h1>Farmer Sign_Up </h1>
-    <form action="verify" method="POST">
+    <form action="fverify" method="POST">
         {% csrf_token %}
         <input type="text" name="first_name" placeholder="first_name">
         <input type="text" name="second_name" placeholder="second_name">
@@ -22,7 +22,7 @@
             <option value="guduvancherry-chennai">Uzhavar Sandhai-guduvancherry</option>
         </select>
         <br><br>
-        <input type=-"text" name="shop_no" placeholder="shop no">
+        <input type="text" name="shop_no" placeholder="shop no">
         <br><br>
 
         <input type="submit" value="Verify Email">
