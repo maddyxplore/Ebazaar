@@ -1,6 +1,8 @@
 from django.shortcuts import render
+from .models import User
 from . import otp
 import yagmail
+import crypt # for password encryption
 
 global otp_secret
 otp_secret = otp.otp()
@@ -33,19 +35,69 @@ def csignup(request):
    return render(request, "csignup.html")
 
 
-def verify(request):
+def cverify(request):
    if request.method == "POST":
+      first_name = request.POST["first_name"]
+      second_name = request.POST["second_name"]
       email = request.POST["email"]
+      phone = request.POST["phone"]
+      password = request.POST["password"]
+      location = request.POST["location"]
+      address = request.POST["address"]
+      # sending email
       send_mail(email)
-      data_set = {"email":email}
-      return render(request, "verify.html",{'data_set':data_set})
+      # data set to otp verification 
+      data_set = {"first_name":first_name,"second_name":second_name,"phone":phone,"password":password,"location":location,"address":address,"email":email}
+
+      return render(request, "cverify.html",{'data_set':data_set})
+
    elif request.method == "GET":
-      otp_num = request.GET["otp"]
+      first_name = request.GET["first_name"]
+      second_name = request.GET["second_name"]
       email = request.GET["email"]
-      print("otp",type(otp_secret))
-      print(type(otp_num))
+      phone = request.GET["phone"]
+      password = request.GET["password"]
+      location = request.GET["location"]
+      address = request.GET["address"]
+      otp_num = request.GET["otp"]
+      shop_no = ""
+      password = crypt.crypt(password)
+      if str(otp_secret) == otp_num:
+         user = User.objects.create(First_name=first_name, Second_name=second_name,
+         Email=email,Phone=phone,Password=password,Location=location,Address=address,Shop_no=shop_no)
+         user.save()
+         return render(request, "login.html")
+      else:
+         return render(request, "csignup.html")
+
+def fverify(request):
+   if request.method == "POST":
+      first_name = request.POST["first_name"]
+      second_name = request.POST["second_name"]
+      email = request.POST["email"]
+      phone = request.POST["phone"]
+      password = request.POST["password"]
+      location = request.POST["location"]
+      shop_no = request.POST["shop_no"]
+      # sending email
+      send_mail(email)
+      # data set to otp verification 
+      data_set = {"first_name":first_name,"second_name":second_name,"phone":phone,"password":password,"location":location,"shop_no":shop_no,"email":email}
+
+      return render(request, "fverify.html",{'data_set':data_set})
+   
+   elif request.method == "GET":
+      first_name = request.GET["first_name"]
+      second_name = request.GET["second_name"]
+      email = request.GET["email"]
+      phone = request.GET["phone"]
+      password = request.GET["password"]
+      location = request.GET["location"]
+      shop_no = request.GET["shop_no"]
+      otp_num = request.GET["otp"]
+
+
       if str(otp_secret) == otp_num:
          return render(request, "login.html")
       else:
-         return render(request, "signup.html")
-
+         return render(request, "fsignup.html")
