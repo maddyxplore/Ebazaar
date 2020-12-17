@@ -10,5 +10,7 @@ urlpatterns = [
     path("fverify", views.fverify,name="fverify"),
     path("signuppath",views.signuppath,name="signuppath"),
     path("login",views.login,name="login"),
+    path("forget_password",views.forget_password,name="forget_password"),
+
 
 ]

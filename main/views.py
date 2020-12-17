@@ -117,3 +117,14 @@ def fverify(request):
          return render(request, "login.html")
       else:
          return render(request, "fsignup.html")
+
+def forget_password(request):
+   if request.method == "POST":
+      email = request.POST["email"]
+      if User.objects.filter(email=email).exists():
+         send_mail(email)
+         return render(request, "password_verify.html")
+      else:
+         return render(request, "forget_password.html")
+
+   return render(request, "forget_password.html")
