@@ -9,4 +9,6 @@ urlpatterns = [
     path("cverify", views.cverify,name="cverify"),
     path("fverify", views.fverify,name="fverify"),
     path("signuppath",views.signuppath,name="signuppath"),
+    path("login",views.login,name="login"),
+
 ]

@@ -3,13 +3,15 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 
-class User(models.Model):
-    First_name = models.CharField(max_length=100)
-    Second_name = models.CharField(max_length=100)
-    Email = models.CharField(max_length=100)
+
+class cuser(models.Model):
     Phone = models.CharField(max_length=10)
-    Password = models.CharField(max_length=200)
     Location = models.CharField(max_length=30)
     Address = models.CharField(max_length=250)
+    user = models.OneToOneField(User,default=None,on_delete=models.CASCADE)
+    
+class fuser(models.Model):
+    Phone = models.CharField(max_length=10)
+    Location = models.CharField(max_length=30)
     Shop_no = models.CharField(max_length=20)
-    is_farmer = models.BooleanField(default=False)
+    user = models.OneToOneField(User,default=None,on_delete=models.CASCADE)
