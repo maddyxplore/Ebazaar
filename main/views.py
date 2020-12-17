@@ -27,7 +27,10 @@ def login(request):
       name = User.objects.get(email=name.lower()).username
       password = request.POST['password']
       user = auth.authenticate(username=name , password = password)
-      data_set = {user:"customer"}
+      if user.is_staff:
+         data_set = "farmer"
+      else:
+         data_set = "customer"
       return render(request,"logged.html",{'data_set':data_set})      
    else:
       return render(request, "login.html")
@@ -92,7 +95,7 @@ def fverify(request):
       # sending email
       send_mail(email)
       # data set to otp verification 
-      data_set = {"first_name":first_name,"second_name":second_name,"phone":phone,"password":password,"location":location,"shop_no":shop_no,"email":email}
+      data_set = {"first_name":first_name,"second_name":second_name,"phone":phone,"password":password,"location":location,"user_name":user_name,"shop_no":shop_no,"email":email}
 
       return render(request, "fverify.html",{'data_set':data_set})
    
