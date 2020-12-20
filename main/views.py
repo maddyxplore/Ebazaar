@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.contrib.auth.models import auth
 from .models import User,cuser,fuser
 from . import otp
@@ -123,8 +123,30 @@ def forget_password(request):
       email = request.POST["email"]
       if User.objects.filter(email=email).exists():
          send_mail(email)
-         return render(request, "password_verify.html")
+         data_set = email
+         return render(request, "password_verify.html",{'data_set':data_set})
       else:
          return render(request, "forget_password.html")
+   else:
+      return render(request, "forget_password.html")
+   
+def change_password(request):
+   if request.method == "POST":
+      otp = request.POST["pass_otp"]
+      email = request.POST["email"]
+      data_set = email
+      print(otp_secret)
+      print(otp)
+      if otp == str(otp_secret):
+         return render(request, "change_password.html",{'data_set':data_set})
+      else:
+         return render(request, "forget_password.html")
+   elif request.method == "GET":
+      password = request.GET["change_password"]
+      email = request.GET["email"]      
+      u = User.objects.get(username=User.objects.get(email=email.lower()).username)
+      u.set_password(password)
+      u.save()
+      return redirect(login)
 
-   return render(request, "forget_password.html")
+

@@ -11,6 +11,7 @@ urlpatterns = [
     path("signuppath",views.signuppath,name="signuppath"),
     path("login",views.login,name="login"),
     path("forget_password",views.forget_password,name="forget_password"),
+    path("change_password", views.change_password,name="change_password"),
 
 
 ]
